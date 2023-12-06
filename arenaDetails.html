@@ -11,11 +11,17 @@
     <link href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../lib/font-awesome/dist/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="myCSS.css" />
+    <style>
+        .dark-mode {
+            background-color: #333;
+            color: azure;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html" tabindex="NBA"><img src="NBA Nav Bar.png" height="24" /></a>
+            <a class="navbar-brand" href="index.html" tabindex="NBA"><img src="NBA Nav Bar.png" height="16" width="16"/></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,7 +37,7 @@
                 </ul>
                 <ul>
                     <li class="nav-item">
-                        <button class="btn btn-secondary"><i class="fa fa-moon-o" onclick="//fazer butão mudar de cor ou tornar-se sol"></i></button>
+                        <button class="btn btn-secondary"><i class="fa fa-moon-o" onclick="DarkMode()"></i></button>
                     </li>
                 </ul>
             </div>
@@ -105,5 +111,6 @@
     <script src="../lib/knockout/dist/knockout-latest.min.js"></script>
     <script src="../lib/jquery/dist/jquery.min.js"></script>
     <script src="arenaDetails.js"></script>
+    <script src="DarkMode.js"></script>
 </body>
 </html>
