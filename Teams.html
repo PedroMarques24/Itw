@@ -38,10 +38,9 @@
                         </ul>
                         </li>
                 </ul>
-                <ul>
-                    <li class="nav-item">
-                        <button class="btn btn-secondary"><i class="fa fa-moon-o" onclick="//fazer butão mudar de cor ou tornar-se sol"></i></button>
-                    </li>
+                <ul class="navbar-nav justify-content-end" id="bd-theme">
+                    <li class="navbar-text"><div type="button" data-bs-theme-value="dark"><i class="fa fa-moon-o fa-toggle-off"></i></div></li>
+                    <li class="navbar-text"><div type="button" data-bs-theme-value="light"><i class="fa fa-sun-o fa-toggle-on"></i></div></li>
                 </ul>
             </div>
         </div>
@@ -137,5 +136,6 @@
     <script src="../lib/knockout/dist/knockout-latest.min.js"></script>
     <script src="../lib/jquery/dist/jquery.min.js"></script>
     <script src="Teams.js"></script>
+    <script src="Darkmode.js"></script>
 </body>
 </html>
