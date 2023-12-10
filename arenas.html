@@ -27,7 +27,16 @@
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="news.html"><i class="fa fa-newspaper-o text-dark"></i> News</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="States.html"><i class="fa fa-map-marker text-success"></i> States</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="Seasons.html"><i class="fa fa-calendar text-info "></i> Seasons</a></li>
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="xxx.html"><i class="fa fa-magic" title="The party continues..."></i> &middot;&middot;&middot;</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Auxiliary Tables
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="playerPositions.html">Player Positions</a></li>
+                            <li><a class="dropdown-item" href="Divisions.html">Divisions</a></li>
+                          <li><a class="dropdown-item" href="Conferences.html">Conferences</a></li>
+                        </ul>
+                        </li>
                 </ul>
                 <ul>
                     <li class="nav-item">
@@ -46,7 +55,7 @@
         <div class="row small">
             <p class=" col-4 mr-auto pt-2">
                 <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
-                <span data-bind="html: 'Games: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
+                <span data-bind="html: 'Arenas: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
             </p>
             <div class="col-8 my-0 pt-3">
                 <ul class="pagination float-end">

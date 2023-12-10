@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>States list</title>
+    <title>ITW 2023/24 - NBA Arenas List</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
@@ -21,20 +21,20 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="arenas.html"><i class="fa fa-dribbble text-warning"></i> Arenas</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="arenas.html"><i class="fa fa-dribbble text-warning"></i> Arenas</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="Players.html"><i class="fa fa-user-o text-primary"></i> Players</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="Teams.html"><i class="fa fa-flag-o text-danger"></i> Teams</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="news.html"><i class="fa fa-newspaper-o text-dark"></i> News</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="States.html"><i class="fa fa-map-marker text-success"></i> States</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="States.html"><i class="fa fa-map-marker text-success"></i> States</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="Seasons.html"><i class="fa fa-calendar text-info "></i> Seasons</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Auxiliary Tables
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="playerPositions.html">Player Positions</a></li>
-                            <li><a class="dropdown-item" href="Divisions.html">Divisions</a></li>
-                            <li><a class="dropdown-item" href="Conferences.html">Conferences</a></li>
+                          <li><a class="dropdown-item" href="playerPositions.html">Player Positions</a></li>
+                          <li><a class="dropdown-item" href="Divisions.html">Divisions</a></li>
+                          <li><a class="dropdown-item" href="Conferences.html">Conferences</a></li>
                         </ul>
                         </li>
                 </ul>
@@ -55,25 +55,25 @@
         <div class="row small">
             <p class=" col-4 mr-auto pt-2">
                 <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
-                <span data-bind="html: 'States: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
+                <span data-bind="html: 'Conferences: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
             </p>
             <div class="col-8 my-0 pt-3">
                 <ul class="pagination float-end">
                     <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
-                    <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: './States.html?page=' + '1',  rel:'prev'}">⇤</a></li>
-                    <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: './States.html?page=' + previousPage(),  rel:'prev'}">←</a></li>
+                    <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: './Conferences.html?page=' + '1',  rel:'prev'}">⇤</a></li>
+                    <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: './Conferences.html?page=' + previousPage(),  rel:'prev'}">←</a></li>
                     <!-- /ko -->
                     <!-- ko foreach: pageArray()-->
                     <!-- ko if:$data == $parent.currentPage() -->
                     <li class="active page-item"><a class="page-link" data-bind="attr: { title:'Current Page ' + $data }, text: $data"></a></li>
                     <!-- /ko -->
                     <!-- ko if:$data != $parent.currentPage() -->
-                    <li class="page-item"><a class="page-link" data-bind="attr: { href: './States.html?page=' + $data, title:'Goto Page ' + $data }, text:$data"></a></li>
+                    <li class="page-item"><a class="page-link" data-bind="attr: { href: './Conferences.html?page=' + $data, title:'Goto Page ' + $data }, text:$data"></a></li>
                     <!-- /ko -->
                     <!-- /ko -->
                     <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
-                    <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: './arenas.html?page=' + nextPage(), rel:'next' }">→</a></li>
-                    <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: './arenas.html?page=' + totalPages() }">⇥</a></li>
+                    <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: './Conferences.html?page=' + nextPage(), rel:'next' }">→</a></li>
+                    <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: './Conferences.html?page=' + totalPages() }">⇥</a></li>
                     <!-- /ko -->
                 </ul>
             </div>
@@ -85,7 +85,6 @@
                 <tr>
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Teams</th>
                     <th scope="col" class="text-right"></th>
                 </tr>
             </thead>
@@ -93,9 +92,8 @@
                 <tr>
                     <td class="align-middle" data-bind="text:Id"></td>
                     <td class="align-middle" data-bind="text:Name"></td>
-                    <td class="align-middle" data-bind="text:Id"></td>
                     <td class="text-end">
-                        <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./arenaDetails.html?id=' + Id }"><i class="fa fa-eye" title="Show details"></i></a>
+                        <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./Conferences.html?id=' + Id }"><i class="fa fa-eye" title="Show details"></i></a>
                         <button class="btn btn-default btn-xs"><i class="fa fa-heart-o" data-bind="attr : { 'id': 'favourite_' + Id }" title="Add to favorites"></i></button>
                     </td>
                 </tr>
@@ -130,6 +128,6 @@
     <script src="../lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../lib/knockout/dist/knockout-latest.min.js"></script>
     <script src="../lib/jquery/dist/jquery.min.js"></script>
-    <script src="States.js"></script>
+    <script src="Conferences.js"></script>
 </body>
 </html>

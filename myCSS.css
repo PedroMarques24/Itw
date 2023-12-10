@@ -36,3 +36,9 @@
 li.page-item a {
     font-size: 0.85rem;
 }
+
+
+.dark-mode {
+            background-color: #333;
+            color: azure;
+        }

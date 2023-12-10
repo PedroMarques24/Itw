@@ -3,8 +3,8 @@ var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
     var self = this;
-    self.baseUri = ko.observable('http://192.168.160.58/NBA/API/Teams');
-    self.displayName = 'NBA Teams List';
+    self.baseUri = ko.observable('http://192.168.160.58/NBA/API/Conferences/');
+    self.displayName = 'Conferences List';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     self.records = ko.observableArray([]);
@@ -44,7 +44,7 @@ var vm = function () {
 
     //--- Page Events
     self.activate = function (id) {
-        console.log('CALL: getTeams...');
+        console.log('CALL: getConferences...');
         var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
