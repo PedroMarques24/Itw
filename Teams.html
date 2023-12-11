@@ -95,7 +95,7 @@
                 <tr>
                     <td class="align-middle" data-bind="text:Acronym"></td>
                     <td class="align-middle" data-bind="text:Name"></td>
-                    <td class="align-middle" data-bind="text:City"></td>
+                    <td class="align-middle" data-bind="text:City"><a class="nav-link" data-bind="text:StateName, attr: { href:'./stateDetails.html?id=' + StateId }" title="Show State Details"></a></td></td>
                     <td class="align-middle" data-bind="text:ConferenceName"></td>
                     <td class="align-middle" data-bind="text:DivisionName"></td>
                     <td class="align-middle" data-bind="text:StateName"></td>
@@ -123,7 +123,7 @@
         </div>
     </div>
     <!-- End of Working Area -->
-    <nav class="navbar navbar-light bg-light fixed-bottom">
+    <nav class="navbar navbar-expand-sm fixed-bottom bg-body-tertiary border-top">
         <div class="container small">
             <div class="navbar-text">&copy;  Introdução as Tecnologias Web - 2023/24</div>
             <div class="navbar-text">Made with <i class="fa fa-heart-o text-danger"></i> for U by <a href="mailto:jsp@ua.pt" class="text-decoration-none text-muted">jsp@ua.pt</a>.</div>
