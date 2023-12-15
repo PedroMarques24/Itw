@@ -25,7 +25,7 @@ $('document').ready(function () {
         // Instantiate and draw our chart, passing in some options.
         new Chart(ctx, {
             type: 'bar',
-            title: 'olá',
+            title: 'Seasons Chart',
             data: {
                 labels: myLabels,
                 datasets: [{
