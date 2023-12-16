@@ -3,9 +3,10 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  height: 400px;
+  height: 300px;
   gap: 10px;
   margin-top: 35px;
+  margin-bottom: 35px;
   
 
   > div {
@@ -16,31 +17,31 @@
     box-shadow: 1px 5px 15px #410d0d;
     position: relative;
     overflow: hidden;
-
-    &:nth-of-type(1) {
-      background: url("lebron-james-crown-nba-king-basketball-vupq8sbcyhalxptq.png")
-        no-repeat 50% / cover;
-    }
-    &:nth-of-type(2) {
-      background: url("basketball-background-illustration-ai-generative-free-photo.jpg")
-        no-repeat 50% / cover;
-    }
-    &:nth-of-type(3) {
-      background: url("s-l1600.jpg")
-        no-repeat 50% / cover;
-    }
-    &:nth-of-type(4) {
-      background: url("Gráficos\ De\ Sala\ De\ Aula.jpeg")
-        no-repeat 50% / cover;
-    }
-    &:nth-of-type(5) {
-        background: url("FaYotBRXkAAtHFw.jpg")
+    
+      &:nth-of-type(1) {
+        background: url("lebron-james-crown-nba-king-basketball-vupq8sbcyhalxptq.png")
           no-repeat 50% / cover;
       }
-    &:nth-of-type(6) {
-    background: url("1558247.jpg")
-        no-repeat 50% / cover;
-    }
+      &:nth-of-type(2) {
+        background: url("basketball-background-illustration-ai-generative-free-photo.jpg")
+          no-repeat 50% / cover;
+      }
+      &:nth-of-type(3) {
+        background: url("s-l1600.jpg")
+          no-repeat 50% / cover;
+      }
+      &:nth-of-type(4) {
+        background: url("Gráficos\ De\ Sala\ De\ Aula.jpeg")
+          no-repeat 50% / cover;
+      }
+      &:nth-of-type(5) {
+          background: url("FaYotBRXkAAtHFw.jpg")
+            no-repeat 50% / cover;
+        }
+      &:nth-of-type(6) {
+      background: url("1558247.jpg")
+          no-repeat 50% / cover;
+      }
 
     .content2 {
       font-size: 1.5rem;

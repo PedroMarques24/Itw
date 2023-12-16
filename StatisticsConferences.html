@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="myCSS.css" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm fixed-top bg-body-tertiary border-bottom">
+    <nav class="navbar navbar-expand-sm fixed-top bg-body-tertiary border-bottom" >
         <div class="container">
             <a class="navbar-brand" href="index.html" tabindex="NBA"><img src="NBA Nav Bar.png" height="24" /></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,108 +46,31 @@
             </div>
         </div>
     </nav>
-    <!-- Work Area-->
+   
+    <br>
     <div class="container">
-        <div class="row" style="background-image: url(/Itw/basketball-nba-logo-wh8ae0q74gl3payt.png); height: 400px; width:auto;border-color: black;">
-            <div class="row border-bottom g-2" data-bind="visible: Photo() != '' && Photo() != null">
-                <div class="col-2"></div><div class="small col-10">
-                    <img class="img-thumbnail" data-bind="attr:{src: Photo}" style="max-height: 370px;"><br />
-                </div>
-            </div>
-        </div>
-        <div class="py-2 border-bottom mb-3">
-            <h2 data-bind="text:Name() +' [' + Id() + ']'"></h2>
-        </div>
-        <!-- ko if:Name().length > 0 -->
-        <div class="row border-bottom g-2">
-            <div class="col-2">Game Id</div><div class="col-10" data-bind="text: Id"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Name</div><div class="col-10" data-bind="text: Name"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Birthdate</div><div class="col-10" data-bind="text: Birthdate"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Country</div><div class="col-10" data-bind="text: CountryName() +' ['+CountryId()+']'"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Game Id</div><div class="col-10" data-bind="text: DraftYear"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Position</div><div class="col-10" data-bind="text: PositionName() +' ['+PositionId()+']'"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Height</div><div class="col-10" data-bind="text: Height"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">Weight</div><div class="col-10" data-bind="text: Weight"></div>
-        </div>
-        <div class="row border-bottom g-2">
-            <div class="col-2">School</div><div class="col-10" data-bind="text: School"></div>
-        </div>
-        <!-- /ko -->
-        <!--ko-->
-        <div class="row border-bottom g-2" data-bind="visible: Photo() != '' && Photo() != null">
-            <div class="col-2">Photo</div><div class="small col-10">
-                <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text: Photo" target="_blank"></a>]
-            </div>
-        </div>
-        <!-- /ko -->
-        <a href="./Players.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
+        <div class="col-4 mr-auto max-heigh" style="margin:auto">
+        <canvas  class="img-thumbnail" id="myChart2"></canvas>
     </div>
+    </div>
+
+
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        <img src="../images/NBA_logoH.png" height="30" /> Loading data...
+                        <img src="NBA Nav Bar.png" height="30" /> Loading data...
                     </h5>
                 </div>
                 <div class="modal-body text-center">
-                    <i class="fa fa-spin fa-3x fa-refresh"></i>
+                    <i class="fa fa-spin fa-3x fa-dribbble"></i>
                 </div>
             </div>
         </div>
     </div>
-    <!-- List of teams Section -->
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h4>List of Teams</h4>
-            </div>
-            <!-- ko foreach:Teams -->
-            <div class="col-6 col-md-4 col-lg-3 mb-3">
-                <div class="border rounded py-2 px-2 small text-center">
-                    <a data-bind="attr: { href:'./TeamsDetails.html?id=' + Id + '&Acronym=' + Acronym}" class="nav-link d-flex flex-column align-items-center"
-                        title="Show Team details">
-                        <i class="fa fa-users mb-2" style="font-size: 18px;"></i> <!---Meter -->
-                        <div data-bind="text: Name" class="mt-2"></div>
-                    </a>
-                </div>
-            </div>
-            <!-- /ko -->
-        </div>
-    </div>
-    <!-- List of teams Section -->
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h4>List of Seasons</h4>
-            </div>
-            <!-- ko foreach:Seasons -->
-            <div class="col-6 col-md-4 col-lg-3 mb-3">
-                <div class="border rounded py-2 px-2 small text-center">
-                    <i class="fa fa-calendar mb-2" style="font-size: 18px;"></i>
-                        <div data-bind="text: Season" class="mt-2"></div>
-                </div>
-            </div>
-            <!-- /ko -->
-        </div>
-    </div>
-    
-    <!-- End of Work Area -->
+    <!-- End of Working Area -->
     <nav class="navbar navbar-expand-sm fixed-bottom bg-body-tertiary border-top">
         <div class="container small">
             <div class="navbar-text">&copy;  Introdução as Tecnologias Web - 2023/24</div>
@@ -160,7 +83,8 @@
     <script src="../lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../lib/knockout/dist/knockout-latest.min.js"></script>
     <script src="../lib/jquery/dist/jquery.min.js"></script>
-    <script src="playersDetails.js"></script>
+    <script src="../lib/chartjs/dist/chart.umd.js"></script>
+    <script src="StatisticsConferences.js" type="module"></script>
     <script src="Darkmode.js"></script>
 </body>
 </html>

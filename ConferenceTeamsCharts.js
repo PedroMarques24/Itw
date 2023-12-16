@@ -50,7 +50,6 @@
             /*myData.push(item.Players);/** */
 
             ajaxHelper(composedUri + conferenceId, "GET").done(function(data) {
-                console.log("!!!")
                 //teamsData.push(data.Teams.length)
                 pieChart.data.datasets[0].data.push(data.Teams.length)
                 pieChart.update()
