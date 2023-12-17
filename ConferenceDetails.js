@@ -10,15 +10,11 @@ var vm = function () {
     //--- Data Record
     self.Id = ko.observable('');
     self.Name = ko.observable('');
-    self.StateId = ko.observable('');
-    self.StateName = ko.observable('');
-    self.TeamId = ko.observable('');
-    self.TeamName = ko.observable('');
-    self.TeamAcronym = ko.observable('');
-    self.Location = ko.observable('');
-    self.Capacity = ko.observable('');
-    self.Opened = ko.observable('');
-    self.Photo = ko.observable('');
+    self.Logo = ko.observable('');
+    self.Teams = ko.observableArray([]);
+    self.Divisions = ko.observableArray([]);
+
+    
 
     //--- Page Events
     self.activate = function (id) {
@@ -29,15 +25,9 @@ var vm = function () {
             hideLoading();
             self.Id(data.Id);
             self.Name(data.Name);
-            self.StateId(data.StateId);
-            self.StateName(data.StateName);
-            self.TeamId(data.TeamId);
-            self.TeamName(data.TeamName);
-            self.TeamAcronym(data.TeamAcronym);
-            self.Location(data.Location);
-            self.Capacity(data.Capacity);
-            self.Opened(data.Opened);
-            self.Photo(data.Photo);
+            self.Logo(data.Logo);
+            self.Teams(data.Teams);
+            self.Divisions(data.Divisions);
         });
     };
 

@@ -20,6 +20,8 @@ var vm = function () {
     self.City = ko.observable('');
     self.Logo = ko.observable('');
     self.History = ko.observable('');
+    self.Seasons =ko.observableArray([]);
+    self.Players = ko.observableArray([]);
 
 
     //--- Page Events
@@ -41,6 +43,8 @@ var vm = function () {
             self.City(data.City);
             self.Logo(data.Logo);
             self.History(data.History);
+            self.Seasons(data.Seasons);
+            self.Players(data.Players);
 
         });
     };
