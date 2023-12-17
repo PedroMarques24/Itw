@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
     <link href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../lib/font-awesome/dist/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="../lib/jquery-ui/dist/themes/ui-darkness/jquery-ui.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="myCSS.css" />
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -56,10 +57,17 @@
      <button id="showTableBtn">Show Table</button>
     <!-- Working Area -->
     <div id="table-container" class="container" style="display: none;">
-    <div class="container">
-        <div class="border-bottom py-2 mb-2">
-            <h2 data-bind="text:displayName"></h2>
-        </div>
+        <div class="container">
+            <div class="border-bottom py-2 mb-2">
+                <h2 data-bind="text:displayName"></h2>
+                <div class="input-group rounded ui-widget">
+                    <input type="search" class="form-control rounded" id="searchbar" placeholder="Pesquisa de Arenas" aria-label="Search"
+                           aria-describedby="search-addon"/>
+                    <span class="input-group-text border-0" id="search-addon">
+                        <i class="fa fa-search"></i>
+                    </span>
+                </div>
+            </div>
         <!-- ko if:records().length > 0 -->
         <div class="row small">
             <p class=" col-4 mr-auto pt-2">
@@ -146,6 +154,7 @@
     <script src="../lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../lib/knockout/dist/knockout-latest.min.js"></script>
     <script src="../lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
     <script src="arenas.js"></script>
     <script src="Darkmode.js"></script>
     <script src="Maps.js"></script>
@@ -192,7 +201,58 @@
 
         // Event listeners for buttons
         $('#showMapBtn').click(showMap);
-        $('#showTableBtn').click(showTable);</script>
+        $('#showTableBtn').click(showTable);
+        </script>
+        <script>
+            $(document).ready(function () {
+            
+                    const api_url = "http://192.168.160.58/NBA/api/Arenas/Search?q=";
+            
+                    $("#searchbar").autocomplete({
+                        minLength: 2,
+                        source: function (request, response) {
+                            $.ajax({
+                                type: "GET",
+                                url: api_url + request.term.toLowerCase(),
+                                dataType: "json",
+                                success: function (data) {
+                                    if (data && data.length > 0) {
+                                        var nData = $.map(data.slice(0,7), function (value, key) {
+                                            return {
+                                                label: value.Name,
+                                                value: value.Id,
+                                            }
+                                        });
+                                        response(nData);
+                                    } else {
+                                        var result = [{
+                                            label: 'Sem resultados',
+                                            value: request.term,
+                                            source: ""
+                                        }];
+            
+                                        response(result);
+                                    }
+                                },
+                                error: function () {
+                                    alert("error!");
+                                }
+                            })
+                        },
+                        select: function (event, ui) {
+                            event.preventDefault();
+                            $("#searchbar").val(ui.item.label);
+            
+                            window.location.href = "./arenaDetails.html?id=" + ui.item.value;
+            
+            
+                            // h.loadTitleModal(ui.item.value)
+                        },
+                        focus: function (event, ui) {
+                            $("#searchbar").val(ui.item.label);
+                        }
+                    });
+                });</script>
 
 </body>
 </html>
