@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>ITW 2023/24 - NBA Arena Details</title>
+    <title>ITW 2023/24 - NBA Arenas List</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
@@ -21,7 +21,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="arenas.html"><i class="fa fa-dribbble text-warning"></i> Arenas</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="arenas.html"><i class="fa fa-dribbble text-warning"></i> Arenas</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="Players.html"><i class="fa fa-user-o text-primary"></i> Players</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="Teams.html"><i class="fa fa-flag-o text-danger"></i> Teams</a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="news.html"><i class="fa fa-newspaper-o text-secondary"></i> News</a></li>
@@ -39,7 +39,6 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav justify-content-end" id="bd-theme">
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="StatisticsGeral.html"><img src="28-280057_flat-icon-bar-graphics-statistics-chart-graph-graph-removebg-preview.png" height="23"></a></li>
                     <li class="navbar-text"><div type="button" data-bs-theme-value="dark"><i class="fa fa-moon-o fa-toggle-off"></i></div></li>
                     <li class="navbar-text"><div type="button" data-bs-theme-value="light"><i class="fa fa-sun-o fa-toggle-on"></i></div></li>
                 </ul>
@@ -49,14 +48,52 @@
     <!-- Work Area-->
     <div class="container">
         <div class="py-2 border-bottom mb-3">
-            <h2 data-bind="text:Name() +' [' + Id() + ']'"></h2>
+            <h2 data-bind="text:Season() +' [' + Id() + ']'"></h2>
         </div>
-        <!-- ko if:Name().length > 0 -->
+        <!-- ko if:Season().length > 0 -->
         <div class="row border-bottom g-2">
-            <div class="col-2">Name</div><div class="col-10" data-bind="text: Name"></div>
+            <div class="col-2">Season</div><div class="col-10" data-bind="text: Season"></div>
         </div>
         <!-- /ko -->
-        <a href="./playerPositions.html" class="btn btn-sm small"><i class="fa fa-list"></i> Back to List</a>
+        <a href="./Seasons.html" class="btn btn-sm small"><i class="fa fa-list"></i> Back to List</a>
+    </div>
+    <!-- List of teams Section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4>List of Teams</h4>
+            </div>
+            <!-- ko foreach:Teams -->
+            <div class="col-6 col-md-4 col-lg-3 mb-3">
+                <div class="border rounded py-2 px-2 small text-center">
+                    <a data-bind="attr: { href:'./TeamsDetails.html?id=' + Id + '&Acronym=' + Acronym}" class="nav-link d-flex flex-column align-items-center"
+                       title="Show Team details">
+                        <i class="fa fa-users mb-2" style="font-size: 18px;"></i> <!---Meter -->
+                        <div data-bind="text: Name" class="mt-2"></div>
+                    </a>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- List of Players Section -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4>List of Players</h4>
+            </div>
+            <!-- ko foreach:Players -->
+            <div class="col-6 col-md-4 col-lg-3 mb-3">
+                <div class="border rounded py-2 px-2 small text-center">
+                    <a data-bind="attr: { href:'./Players.html?id=' + Id}" class="nav-link d-flex flex-column align-items-center"
+                       title="Show Players details">
+                        <i class="fa fa-users mb-2" style="font-size: 18px;"></i> <!---Meter -->
+                        <div data-bind="text: Name" class="mt-2"></div>
+                    </a>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -64,32 +101,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">
-                        <img src="nba-logo_2x.png" height="30" /> Loading data...
+                        <img src="../images/NBA_logoH.png" height="30" /> Loading data...
                     </h5>
                 </div>
                 <div class="modal-body text-center">
                     <i class="fa fa-spin fa-3x fa-refresh"></i>
                 </div>
             </div>
-        </div>
-    </div>
-    <!--Players-->
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h4>List of Players with this position</h4>
-            </div>
-            <!-- ko foreach:Players -->
-            <div class="col-6 col-md-4 col-lg-3 mb-3">
-                <div class="border rounded py-2 px-2 small text-center">
-                    <a data-bind="attr: { href:'./playersDetails.html?id=' + Id}" class="nav-link d-flex flex-column align-items-center"
-                       title="Show Player details">
-                        <i class="fa fa-users mb-2" style="font-size: 18px;"></i> <!---Meter -->
-                        <div data-bind="text: Name" class="mt-2"></div>
-                    </a>
-                </div>
-            </div>
-            <!-- /ko -->
         </div>
     </div>
     <!-- End of Work Area -->
@@ -105,8 +123,7 @@
     <script src="../lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../lib/knockout/dist/knockout-latest.min.js"></script>
     <script src="../lib/jquery/dist/jquery.min.js"></script>
-    <script src="playerPositionsDetails.js"></script>
+    <script src="SeasonsDetails.js"></script>
     <script src="Darkmode.js"></script>
-    <script src="playerDetails.js"></script>
 </body>
 </html>

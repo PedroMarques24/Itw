@@ -3,31 +3,29 @@ var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
     var self = this;
-    self.baseUri = ko.observable('http://192.168.160.58/NBA/API/Conferences/');
-    self.displayName = 'NBA Conferences Details';
+    self.baseUri = ko.observable('http://192.168.160.58/NBA/API/Seasons/');
+    self.displayName = 'NBA Seaons Details';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     //--- Data Record
     self.Id = ko.observable('');
-    self.Name = ko.observable('');
-    self.Logo = ko.observable('');
+    self.Season = ko.observable('');
     self.Teams = ko.observableArray([]);
-    self.Divisions = ko.observableArray([]);
+    self.Players = ko.observableArray([]);
 
     
 
     //--- Page Events
     self.activate = function (id) {
-        console.log('CALL: getConferences...');
+        console.log('CALL: getArena...');
         var composedUri = self.baseUri() + id;
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
             hideLoading();
             self.Id(data.Id);
-            self.Name(data.Name);
-            self.Logo(data.Logo);
+            self.Season(data.Season);
             self.Teams(data.Teams);
-            self.Divisions(data.Divisions);
+            self.Players(data.Players);
         });
     };
 
