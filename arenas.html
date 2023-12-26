@@ -52,9 +52,15 @@
             </div>
         </div>
     </nav>
-     <!-- Toggle buttons -->
-     <button style="margin-left: 10px;margin-top: 3px;" id="showMapBtn">Show Map</button>
-     <button id="showTableBtn">Show Table</button>
+       <!-- Toggle Tabs -->
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="map-tab" data-bs-toggle="tab" data-bs-target="#map" type="button" role="tab" aria-controls="map" aria-selected="true"><i class="fa fa-map-o"></i></button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="table-tab" data-bs-toggle="tab" data-bs-target="#table-container" type="button" role="tab" aria-controls="table-container" aria-selected="false"><i class="fa fa-list"></i></button>
+    </li>
+</ul>
     <!-- Working Area -->
     <div id="table-container" class="container" style="display: none;">
         <div class="container">
@@ -159,50 +165,44 @@
     <script src="Darkmode.js"></script>
     <script src="Maps.js"></script>
     <script>
-        // Your existing JavaScript code here
-        function showMap() {
-        sessionStorage.setItem('currentView', 'map');
-        $('#map').show();
-        $('#table-container').hide();
-    }
+        // Check the stored view state when the page loads
+      $(document).ready(function () {
+          var currentView = sessionStorage.getItem('currentView');
+          if (!currentView) (
+              showMap()
+          )
+          else if (currentView === 'map') {
+              showMap();
+          } else {
+              showTable();
+          }
+          // Add click event listener to the tab buttons
+          $('#map-tab').click(function (e) {
+              e.preventDefault();
+              showMap();
+          });
 
-    // Function to show table and hide map
-    function showTable() {
-        sessionStorage.setItem('currentView', 'table');
-        $('#map').hide();
-        $('#table-container').show();
-    }
+          $('#table-tab').click(function (e) {
+              e.preventDefault();
+              showTable();
+          });
+      });
 
-    // Check the stored view state when the page loads
-    $(document).ready(function () {
-        var currentView = sessionStorage.getItem('currentView');
-        if (!currentView)(
-            showmap()
-        )
-        else if (currentView === 'map') {
-            showMap();
-        } else {
-            showTable();
-        }
-    });
-        // Function to show map and hide table
-        function showMap() {
-            sessionStorage.setItem('currentView', 'map');
-            $('#map').show();
-            $('#table-container').hide();
-        }
+      // Function to show map and hide table
+      function showMap() {
+          sessionStorage.setItem('currentView', 'map');
+          $('#map').show();
+          $('#table-container').hide();
+      }
 
-        // Function to show table and hide map
-        function showTable() {
-            sessionStorage.setItem('currentView', 'table');
-            $('#map').hide();
-            $('#table-container').show();
-        }
-
-        // Event listeners for buttons
-        $('#showMapBtn').click(showMap);
-        $('#showTableBtn').click(showTable);
+      // Function to show table and hide map
+      function showTable() {
+          sessionStorage.setItem('currentView', 'table');
+          $('#map').hide();
+          $('#table-container').show();
+      }
         </script>
+        
         <script>
             $(document).ready(function () {
             
