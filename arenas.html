@@ -169,42 +169,52 @@
     <script src="Maps.js"></script>
     <script>
         // Check the stored view state when the page loads
-      $(document).ready(function () {
-          var currentView = sessionStorage.getItem('currentView');
-          if (!currentView) (
-              showMap()
-          )
-          else if (currentView === 'map') {
-              showMap();
-          } else {
-              showTable();
-          }
-          // Add click event listener to the tab buttons
-          $('#map-tab').click(function (e) {
-              e.preventDefault();
-              showMap();
-          });
-
-          $('#table-tab').click(function (e) {
-              e.preventDefault();
-              showTable();
-          });
-      });
-
-      // Function to show map and hide table
-      function showMap() {
-          sessionStorage.setItem('currentView', 'map');
-          $('#map').show();
-          $('#table-container').hide();
-      }
-
-      // Function to show table and hide map
-      function showTable() {
-          sessionStorage.setItem('currentView', 'table');
-          $('#map').hide();
-          $('#table-container').show();
-      }
-        </script>
+        $(document).ready(function () {
+            var currentView = sessionStorage.getItem('currentView');
+            if (!currentView) (
+                showMap()
+            )
+            else if (currentView === 'map') {
+                showMap();
+            } else {
+                showTable();
+            }
+    
+            // Add click event listener to the tab buttons
+            $('#map-tab').click(function (e) {
+                e.preventDefault();
+                showMap();
+            });
+    
+            $('#table-tab').click(function (e) {
+                e.preventDefault();
+                showTable();
+            });
+        });
+    
+        // Function to show map and hide table
+        function showMap() {
+            sessionStorage.setItem('currentView', 'map');
+            $('#map').show();
+            $('#table-container').hide();
+    
+            // Set the active class on the map tab
+            $('#map-tab').addClass('active');
+            $('#table-tab').removeClass('active');
+        }
+    
+        // Function to show table and hide map
+        function showTable() {
+            sessionStorage.setItem('currentView', 'table');
+            $('#map').hide();
+            $('#table-container').show();
+    
+            // Set the active class on the table tab
+            $('#table-tab').addClass('active');
+            $('#map-tab').removeClass('active');
+        }
+    </script>
+    
         
         <script>
             $(document).ready(function () {
