@@ -40,6 +40,28 @@ var vm = function () {
             list.push(i + step);
         return list;
     };
+    self.toggleFavourite = function (id) {
+        if (self.favourites.indexOf(id) == -1) {
+            self.favourites.push(id);
+        }
+        else {
+            self.favourites.remove(id);
+        }
+        localStorage.setItem("fav3", JSON.stringify(self.favourites()));
+    };
+    self.SetFavourites = function () {
+        let storage;
+        try {
+            storage = JSON.parse(localStorage.getItem("fav3"));
+        }
+        catch (e) {
+            ;
+        }
+        if (Array.isArray(storage)) {
+            self.favourites(storage);
+        }
+    }
+    self.favourites = ko.observableArray([]);
 
     //--- Page Events
     self.activate = function (id) {
@@ -55,6 +77,7 @@ var vm = function () {
             self.pagesize(data.PageSize)
             self.totalPages(data.TotalPages);
             self.totalRecords(data.TotalRecords);
+            self.SetFavourites();
             //self.SetFavourites();
         });
     };

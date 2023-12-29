@@ -14,8 +14,8 @@
                 datasets: [{
                     label: 'Player Positions',
                     data: playersData,
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)', // Adjust color as needed
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'blue', // Adjust color as needed
+                    borderColor: 'blue',
                     borderWidth: 1
                 }]
             },
@@ -26,7 +26,7 @@
                         display: true,
                         labels: { align: 'start', font: { family: 'Open Sans' } },
                         title: {
-                            display: true, text: ['Estatísticas Gerais', 'N.º de Jogadores por Season da NBA, por tipo de Season'], padding: { top: 10, bottom: 10 }, font: { size: 12, family: 'Open Sans' }
+                            display: true, text: ['Estatísticas Gerais', 'N.º de Jogadores por Posição na NBA'], padding: { top: 10, bottom: 10 }, font: { size: 12, family: 'Open Sans' }
                         },
                     }
                 },

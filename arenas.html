@@ -45,6 +45,7 @@
                         </li>
                 </ul>
                 <ul class="navbar-nav justify-content-end" id="bd-theme">
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="FavouriteGeral.html"><i class="fa fa-heart  text-danger "></i></a></li>
                     <li class="nav-item"><a class="nav-link" aria-current="page" href="StatisticsGeral.html"><img src="28-280057_flat-icon-bar-graphics-statistics-chart-graph-graph-removebg-preview.png" height="23"></a></li>
                     <li class="navbar-text"><div type="button" data-bs-theme-value="dark"><i class="fa fa-moon-o fa-toggle-off"></i></div></li>
                     <li class="navbar-text"><div type="button" data-bs-theme-value="light"><i class="fa fa-sun-o fa-toggle-on"></i></div></li>
@@ -116,7 +117,9 @@
                     <td class="align-middle" data-bind="text:Location"></td>
                     <td class="text-end">
                         <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./arenaDetails.html?id=' + Id }"><i class="fa fa-eye" title="Show details"></i></a>
-                        <button class="btn btn-default btn-xs"><i class="fa fa-heart-o" data-bind="attr : { 'id': 'favourite_' + Id }" title="Add to favorites"></i></button>
+                        <button class="btn btn-default btn-outline-danger btn-sm btn-favourite" data-bind="click: () => $parent.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }">
+                            <i data-bind="attr: {'class': $parent.favourites().includes(Id)? 'fa fa-heart text-danger' : 'fa fa-heart-o'}" class="fa fa-heart-o" title="Selecione para adicionar aos favoritos"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -145,7 +148,7 @@
     <nav class="navbar navbar-expand-sm fixed-bottom bg-body-tertiary border-top">
         <div class="container small">
             <div class="navbar-text">&copy;  Introdução as Tecnologias Web - 2023/24</div>
-            <div class="navbar-text">Made with <i class="fa fa-heart-o text-danger"></i> for U by <a href="mailto:jsp@ua.pt" class="text-decoration-none text-muted">jsp@ua.pt</a>.</div>
+            <div class="navbar-text">Made with <i class="fa fa-heart-o text-danger"></i> for <a href="mailto:jsp@ua.pt" class="text-decoration-none text-muted">jsp@ua.pt</a>.</div>
             <div class="navbar-nav">
                 <div class="nav-item text-end"><a href="https://www.ua.pt" class="nav-link">Universidade de Aveiro</a></div>
             </div>

@@ -26,7 +26,7 @@ $('document').ready(function () {
                     display: true,
                     labels: { align: 'start', font: { family: 'Open Sans' } },
                     title: {
-                        display: true, text: ['Estatísticas Gerais', 'N.º de Equipas por Conferência da NBA, por tipo de Conferência'], padding: { top: 10, bottom: 10 }, font: { size: 12, family: 'Open Sans' }
+                        display: true, text: ['Estatísticas Gerais', 'N.º de Equipas por Divisão da NBA'], padding: { top: 10, bottom: 10 }, font: { size: 12, family: 'Open Sans' }
                     },
                 }
             },
