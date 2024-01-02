@@ -56,24 +56,33 @@ function getUrlParameter(sParam) {
     console.log("VM initialized!")
 };
 
+function TeamsViewModel() {
+    var self = this;
+
+
+    // Example function
+    self.activate = function (id) {
+        console.log('CALL: getArenas...');
+        var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
+        ajaxHelper(composedUri, 'GET').done(function (data) {
+            console.log(data);
+            hideLoading();
+            self.records(data.Records);
+            self.currentPage(data.CurrentPage);
+            self.hasNext(data.HasNext);
+            self.hasPrevious(data.HasPrevious);
+            self.pagesize(data.PageSize)
+            self.totalPages(data.TotalPages);
+            self.totalRecords(data.TotalRecords);
+            self.SetFavourites();
+            //self.SetFavourites();
+        });
+    };
+}
+
+// Instantiate the view model
+var teamsViewModel = new TeamsViewModel();
 //--- Page Events
-self.activate = function (id) {
-    console.log('CALL: getSeasons...');
-    var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
-    ajaxHelper(composedUri, 'GET').done(function (data) {
-        console.log(data);
-        hideLoading();
-        self.records(data.Records);
-        self.currentPage(data.CurrentPage);
-        self.hasNext(data.HasNext);
-        self.hasPrevious(data.HasPrevious);
-        self.pagesize(data.PageSize)
-        self.totalPages(data.TotalPages);
-        self.totalRecords(data.TotalRecords);
-        self.SetFavourites();
-        //self.SetFavourites();
-    });
-};
 function showLoading() {
     $("#myModal").modal('show', {
         keyboard: false
@@ -94,7 +103,7 @@ function sleep(milliseconds) {
 
 $(document).ready(function () {
     console.log("ready!!");
-    ko.applyBindings(new vm());
+    ko.applyBindings(teamsViewModel);
 });
 
 $(document).ajaxComplete(function (event, xhr, options) {
@@ -145,7 +154,7 @@ $(document).ready(function () {
                         <td class="align-middle">${data.State}</td>
                         <td class="align-middle">
                         
-                        <a href="./TeamsDetails.html?id=${Id}&Acronym=${Acronym}" class="btn btn-default btn-light btn-xs">
+                        <a href="./TeamsDetails.html?id=${Id}&Acronym=${data.Acronym}" class="btn btn-default btn-light btn-xs">
                 <i class="fa fa-eye" title="Show team details"></i>
             </a>
                         </td>

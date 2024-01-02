@@ -3,51 +3,42 @@ var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
     var self = this;
-    self.baseUri = ko.observable('http://192.168.160.58/NBA/API/Players/');
-    self.displayName = 'NBA Player Details';
+    self.baseUri = ko.observable('http://192.168.160.58/NBA/API/SeasonTypes/');
+    self.displayName = 'NBA Conferences Details';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     //--- Data Record
     self.Id = ko.observable('');
     self.Name = ko.observable('');
-    self.Birthdate = ko.observable('');
-    self.CountryId = ko.observable('');
-    self.CountryName = ko.observable('');
-    self.DraftYear = ko.observable('');
-    self.PositionId = ko.observable('');
-    self.PositionName = ko.observable('');
-    self.Height = ko.observable('');
-    self.Weight = ko.observable('');
-    self.Photo = ko.observable('person_circle_icon_159926.png');
-    self.School = ko.observable('');
-    self.Biography = ko.observable('');
+    self.Logo = ko.observable('');
     self.Seasons = ko.observableArray([]);
-    self.Teams=ko.observableArray([]);
+    
+
+    
 
     //--- Page Events
     self.activate = function (id) {
-        console.log('CALL: getPlayer...');
+        console.log('CALL: getConferences...');
         var composedUri = self.baseUri() + id;
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
             hideLoading();
             self.Id(data.Id);
             self.Name(data.Name);
-            self.Birthdate(data.Birthdate);
-            self.CountryId(data.CountryId);
-            self.CountryName(data.CountryName);
-            self.DraftYear(data.DraftYear);
-            self.PositionId(data.PositionId);
-            self.PositionName(data.PositionName);
-            self.Height(data.Height);
-            self.Weight(data.Weight);
-            self.School(data.School);
-            if (data.Photo != null){self.Photo(data.Photo)};
-            self.Biography(data.Biography);
+            switch (self.Id()){
+                case 1:
+                    self.Logo('REGULAR-SEASON.jpg');
+                    break;
+                case 2:
+                    self.Logo('playoffs.jpg');
+                    break;
+                case 3:
+                    self.Logo('IsT.jpg');
+                    break;
+            }
+            
             self.Seasons(data.Seasons);
-            self.Teams(data.Teams);
-            console.log(self.Teams())
-            console.log(self.Seasons())
+            
         });
     };
 
