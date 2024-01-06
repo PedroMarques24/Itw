@@ -11,6 +11,7 @@
     <link href="../lib/font-awesome/dist/css/font-awesome.min.css" rel="stylesheet" />
     <link href="../lib/jquery-ui/dist/themes/ui-darkness/jquery-ui.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="myCSS.css" />
+    <link rel="stylesheet" href="cards.css" />
 </head>
 <body>
     <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary border-bottom">
@@ -48,12 +49,21 @@
             </div>
         </div>
     </nav>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="table-tab" data-bs-toggle="tab" data-bs-target="#table-container" type="button" role="tab" aria-controls="table-container" aria-selected="false"><i class="fa fa-list"></i></button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="grid-tab" data-bs-toggle="tab" data-bs-target="#grid" type="button" role="tab" aria-controls="grid" aria-selected="false"><i class="fa fa-th" aria-hidden="true"></i></button>
+        </li>
+    </ul>
     <!-- Working Area -->
+    <div id="table-container" class="container" style="display: none;">
     <div class="container">
         <div class="border-bottom py-2 mb-2">
             <h2 data-bind="text:displayName"></h2>
             <div class="input-group rounded ui-widget">
-                <input type="search" class="form-control rounded" id="searchbar" placeholder="Pesquisa de Players" aria-label="Search"
+                <input type="search" class="form-control rounded" id="searchbar2" placeholder="Pesquisa de Players" aria-label="Search"
                        aria-describedby="search-addon"/>
                 <span class="input-group-text border-0" id="search-addon">
                     <i class="fa fa-search"></i>
@@ -122,7 +132,94 @@
                 </tr>
             </tbody>
         </table>
+    </div></div>
+    <div id="grid" class="container" style="display: none;">
+        <div class="container">
+            <div class="border-bottom py-2 mb-2">
+                <h2 data-bind="text:displayName"></h2>
+                <div class="input-group rounded ui-widget">
+                    <input type="search" class="form-control rounded" id="searchbar" placeholder="Pesquisa de Players" aria-label="Search"
+                           aria-describedby="search-addon"/>
+                    <span class="input-group-text border-0" id="search-addon">
+                        <i class="fa fa-search"></i>
+                    </span>
+                </div>
+            </div>
+        <!-- ko if:records().length > 0 -->
+        <div class="row small">
+            <p class=" col-4 mr-auto pt-2">
+                <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
+                <span data-bind="html: 'Players: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
+            </p>
+            <div class="col-8 my-0 pt-3">
+                <ul class="pagination float-end">
+                    <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
+                    <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: './Players.html?page=' + '1',  rel:'prev'}">⇤</a></li>
+                    <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: './Players.html?page=' + previousPage(),  rel:'prev'}">←</a></li>
+                    <!-- /ko -->
+                    <!-- ko foreach: pageArray()-->
+                    <!-- ko if:$data == $parent.currentPage() -->
+                    <li class="active page-item"><a class="page-link" data-bind="attr: { title:'Current Page ' + $data }, text: $data"></a></li>
+                    <!-- /ko -->
+                    <!-- ko if:$data != $parent.currentPage() -->
+                    <li class="page-item"><a class="page-link" data-bind="attr: { href: './Players.html?page=' + $data, title:'Goto Page ' + $data }, text:$data"></a></li>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
+                    <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: './Players.html?page=' + nextPage(), rel:'next' }">→</a></li>
+                    <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: './Players.html?page=' + totalPages() }">⇥</a></li>
+                    <!-- /ko -->
+                </ul>
+            </div>
+        </div>
+        
+        <!-- /ko -->
+        <div class="row g-2">
+            <!-- ko foreach:records -->
+          <div class="col-6 col-md-4 col-lg-3 col-xl-2 mb-3">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                  <div class="flip-card-front">
+                    <a data-bind="attr: { href:'./playersDetails.html?id=' + Id }" class="nav-link d-flex flex-column align-items-center"
+                       title="Show Season details">
+                       <div class="small col-12" style="border-radius: 0px;position: relative;">
+                        
+                        <img src="person_circle_icon_159926.png" alt="Image 1" style="width: 198px; height: 150px;position: absolute; top: 0; left: 0;" >
+                        
+                        <!-- ko if:Photo!=null -->
+                        <img src="person_circle_icon_159926.png" alt="Image 1" style="width: 198px; height: 150px;position: absolute; top: 0; left: 0;" >
+                        <img class="img-thumbnail" data-bind="attr:{src: Photo}" style="width: 200px; height: 150px;position: absolute; top: 0; left: 0;"><br />
+                        <!--/ko-->
+                    </div>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                      
+                       <div data-bind="text: Name" class="mt-2"></div>
+                    </a>
+                  </div>
+                  <div class="flip-card-back">
+                    <a data-bind="attr: { href:'./playersDetails.html?id=' + Id }" class="nav-link d-flex flex-column align-items-center"
+                       title="Show Season details">
+                       <div data-bind="text: 'Birthdate: ' + Birthdate" class="mt-2"></div>
+                       <div data-bind="text: 'Draft Year: ' +DraftYear" class="mt-2"></div>
+                       <div data-bind="text: 'Country: ' +CountryName" class="mt-2"></div>
+                       <div data-bind="text: 'Position: ' +PositionName" class="mt-2"></div>
+                       
+                       </a>
+                  </div>
+                </div>
+              </div> 
+          </div>
+          <!-- /ko -->
+          </div>
     </div>
+</div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -153,6 +250,53 @@
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
     <script src="Players.js"></script>
     <script src="Darkmode.js"></script>
+    <script>
+        // Check the stored view state when the page loads
+        $(document).ready(function () {
+            var currentView2 = sessionStorage.getItem('currentView2');
+            if (!currentView2) (
+                showTable()
+            )
+            else if (currentView2 === 'grid') {
+                showgrid();
+            } else {
+                showTable();
+            }
+    
+            // Add click event listener to the tab buttons
+    
+            $('#table-tab').click(function (e) {
+                e.preventDefault();
+                showTable();
+            });
+            $('#grid-tab').click(function (e) {
+                e.preventDefault();
+                showgrid();
+            });
+        });
+    
+        // Function to show table and hide map
+        function showTable() {
+            sessionStorage.setItem('currentView2', 'table');
+            $('#grid').hide();
+            $('#table-container').show();
+    
+            // Set the active class on the table tab
+            $('#table-tab').addClass('active');
+            $('#grid-tab').removeClass('active');
+        }
+
+        function showgrid() {
+            sessionStorage.setItem('currentView2', 'grid');
+            $('#table-container').hide();
+            $('#grid').show();
+    
+            // Set the active class on the table tab
+            $('#grid-tab').addClass('active');
+            $('#table-tab').removeClass('active');
+
+        }
+    </script>
     <script>
         $(document).ready(function () {
         
@@ -200,6 +344,52 @@
                     },
                     focus: function (event, ui) {
                         $("#searchbar").val(ui.item.label);
+                    }
+                });
+                
+        
+                $("#searchbar2").autocomplete({
+                    minLength: 2,
+                    source: function (request, response) {
+                        $.ajax({
+                            type: "GET",
+                            url: api_url + request.term.toLowerCase(),
+                            dataType: "json",
+                            success: function (data) {
+                                if (data && data.length > 0) {
+                                    var nData = $.map(data.slice(0,7), function (value, key) {
+                                        return {
+                                            label: value.Name,
+                                            value: value.Id,
+                                        }
+                                    });
+                                    response(nData);
+                                } else {
+                                    var result = [{
+                                        label: 'Sem resultados',
+                                        value: request.term,
+                                        source: ""
+                                    }];
+        
+                                    response(result);
+                                }
+                            },
+                            error: function () {
+                                alert("error!");
+                            }
+                        })
+                    },
+                    select: function (event, ui) {
+                        event.preventDefault();
+                        $("#searchbar2").val(ui.item.label);
+        
+                        window.location.href = "./PlayersDetails.html?id=" + ui.item.value;
+        
+        
+                        // h.loadTitleModal(ui.item.value)
+                    },
+                    focus: function (event, ui) {
+                        $("#searchbar2").val(ui.item.label);
                     }
                 });
             });</script>

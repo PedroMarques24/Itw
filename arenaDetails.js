@@ -18,7 +18,7 @@ var vm = function () {
     self.Location = ko.observable('');
     self.Capacity = ko.observable('');
     self.Opened = ko.observable('');
-    self.Photo = ko.observable('');
+    self.Photo = ko.observable('Arena icon.PNG');
 
     //--- Page Events
     self.activate = function (id) {
@@ -37,7 +37,7 @@ var vm = function () {
             self.Location(data.Location);
             self.Capacity(data.Capacity);
             self.Opened(data.Opened);
-            self.Photo(data.Photo);
+            if (data.Photo != null){self.Photo(data.Photo)};
         });
     };
 

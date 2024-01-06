@@ -9,7 +9,7 @@ var vm = function () {
     self.passingMessage = ko.observable('');
     self.records = ko.observableArray([]);
     self.currentPage = ko.observable(1);
-    self.pagesize = ko.observable(20);
+    self.pagesize = ko.observable(18);
     self.totalRecords = ko.observable(50);
     self.hasPrevious = ko.observable(false);
     self.hasNext = ko.observable(false);
@@ -44,11 +44,13 @@ var vm = function () {
     self.toggleFavourite = function (id) {
         if (self.favourites.indexOf(id) == -1) {
             self.favourites.push(id);
+            console.log(id)
         }
         else {
             self.favourites.remove(id);
         }
         localStorage.setItem("fav5", JSON.stringify(self.favourites()));
+        console.log(localStorage.getItem("fav5"))
     };
     self.SetFavourites = function () {
         let storage;

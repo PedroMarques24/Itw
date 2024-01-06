@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>ITW 2023/24 - NBA Arenas List</title>
+  <meta name="viewport" content="width=device-width">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+  <link href="../lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../lib/font-awesome/dist/css/font-awesome.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="myCSS.css" />
+  <link rel="stylesheet" href="shop.css" />
+  <link href="../lib/jquery-ui/dist/themes/ui-darkness/jquery-ui.min.css" rel="stylesheet" />
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary border-bottom">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" tabindex="NBA"><img src="NBA Nav Bar.png" height="24" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="arenas.html"><i class="fa fa-dribbble text-warning"></i> Arenas</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="Players.html"><i class="fa fa-user-o text-primary"></i> Players</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="Teams.html"><i class="fa fa-flag-o text-danger"></i> Teams</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="news.html"><i class="fa fa-newspaper-o text-secondary"></i> News</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="states.html"><i class="fa fa-map-marker text-success"></i> States</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="seasons.html"><i class="fa fa-calendar text-info "></i> Seasons</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Auxiliary Tables
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="playerPositions.html">Player Positions</a></li>
+                          <li><a class="dropdown-item" href="Divisions.html">Divisions</a></li>
+                          <li><a class="dropdown-item" href="Conferences.html">Conferences</a></li>
+                          <li><a class="dropdown-item" href="TypesOfSeason.html">Types of Season</a></li>
+                          <li><a class="dropdown-item" href="Shop.html">Shop</a></li>
+                        </ul>
+                        </li>
+                </ul>
+                <ul class="navbar-nav justify-content-end" id="bd-theme">
+                  <li class="nav-item"><a class="nav-link" aria-current="page" href="FavouriteGeral.html"><i class="fa fa-heart  text-danger "></i></a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="StatisticsGeral.html"><img src="28-280057_flat-icon-bar-graphics-statistics-chart-graph-graph-removebg-preview.png" height="23"></a></li>
+                    <li class="navbar-text"><div type="button" data-bs-theme-value="dark"><i class="fa fa-moon-o fa-toggle-off"></i></div></li>
+                    <li class="navbar-text"><div type="button" data-bs-theme-value="light"><i class="fa fa-sun-o fa-toggle-on"></i></div></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+  <br />
+  <div class="container mt-4">
+    <form action="http://192.168.160.36/FormEcho.aspx">
+      <div class="row">
+        <div class="col-md-1 offset-6 text-right">
+          <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+        </div>
+        <div class="col-md-1 text-right">
+          <span class="form-control" id="quantidades" title="Quantidade total de produtos">0</span>
+        </div>
+        <div class="col-md-2 text-right">
+          <span class="form-control" id="total" title="Preço total da compra">0.00</span>
+        </div>
+        <div class="col-md-2 text-right">
+          <button type="submit" onclick="return valid()" class="btn btn-primary" title="Enviar pedido">
+            Enviar
+          </button>
+          <button type="button" onclick="clean()" class="btn btn-secondary" title="Limpar pedido">
+            <i class="fa fa-trash-o"></i>
+          </button>
+        </div>
+      </div>
+      <hr />
+      <!-- Toggle buttons -->
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="Shirts-tab" data-bs-toggle="tab" data-bs-target="#Shirts" type="button"
+            role="tab" aria-controls="Shirts" aria-selected="true">T-Shirt</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="Footwear-tab" data-bs-toggle="tab" data-bs-target="#Footwear" type="button"
+            role="tab" aria-controls="Footwear" aria-selected="false">Footwear</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="Tickets-tab" data-bs-toggle="tab" data-bs-target="#Tickets" type="button"
+            role="tab" aria-controls="Tickets" aria-selected="false"><i class="fa fa-ticket"></i></button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="Balls-tab" data-bs-toggle="tab" data-bs-target="#Balls" type="button" role="tab"
+            aria-controls="Balls" aria-selected="false"><i class="fa fa-dribbble"></i></button>
+        </li>
+      </ul>
+      <!-- Working Area -->
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="Shirts" role="tabpanel" aria-labelledby="Shirts" tabindex="0"><div class="row">
+            <div class="col-sm-4 "><img class="modalImage"
+                src="https://images.footballfanatics.com/charlotte-hornets/charlotte-hornets-jordan-statement-name-and-number-t-shirt-lamello-ball_ss5_p-13387208+u-kadvnjbukqqybnvbhdba+v-8w7wgthy79k92tdkag4s.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4 "><img class="modalImage"
+                src="https://images.footballfanatics.com/atlanta-hawks/atlanta-hawks-nike-icon-name-and-number-t-shirt-trae-young-mens_ss4_p-13374227+u-judxr47ak17f04h2bdq0+v-4bba2b3c720644628a5cbe16409249b2.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4 "><img class="modalImage"
+                src="https://images.footballfanatics.com/toronto-raptors/toronto-raptors-black-mesh-crew-neck-t-shirt-by-mitchell-and-ness-mens_ss4_p-12065138+u-tr1noet2t6g5fhqguf6w+v-e5376f421b434a1aaa1bedbf4d8a3001.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty1" name="qty1" value="0" />
+              <h5>Charlotte Hornets Jordan Statement Name & Number T-Shirt - Lamello Ball</h5>
+              <div class="text-danger text-right">
+                <input id="price1" name="price1" value="39.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(1)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty2" name="qty2" value="0" />
+              <h5>Atlanta Hawks Nike Icon Name & Number T-Shirt - Trae Young - Mens </h5>
+              <div class="text-danger text-right">
+                <input id="price2" name="price2" value="39.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(2)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty3" name="qty3" value="0" />
+              <h5>Toronto Raptors Black Mesh Crew Neck T-Shirt By Mitchell & Ness - Mens</h5>
+              <div class="text-danger text-right">
+                <input id="price3" name="price3" value="94.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(3)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+          </div>
+  
+          <p>&nbsp;</p>
+          <div class="row">
+            <div class="col-sm-4 "><img class="modalImage"
+                src="https://images.footballfanatics.com/cleveland-cavaliers/cleveland-cavaliers-fade-graphic-t-shirt-mens_ss4_p-12085378+u-l507c2mpu1h8rhdcjh2z+v-7d655d3a4698464b9d453d5e080b0e28.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4 "><img class="modalImage"
+                src="https://images.footballfanatics.com/memphis-grizzlies/memphis-grizzlies-street-collective-graphic-t-shirt-mens_ss5_p-13341000+u-sjz5hwk7e4wbacfajngz+v-jkx6gyrv8ev30jck1vcw.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4 "><img class="modalImage"
+                src="https://images.footballfanatics.com/los-angeles-lakers/los-angeles-lakers-max-90-courtside-t-shirt-mens_ss5_p-13374166+u-cewwsqvtsqcd6ibfldr6+v-poddon1wxxozf4tpzlkc.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty4" name="qty4" value="0" />
+              <h5>Cleveland Cavaliers Fade Graphic T-Shirt - Mens</h5>
+              <div class="text-danger text-right">
+                <input id="price4" name="price4" value="35.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(4)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty5" name="qty5" value="0" />
+              <h5>Memphis Grizzlies Street Collective Graphic T-Shirt - Mens</h5>
+              <div class="text-danger text-right">
+                <input id="price5" name="price5" value="40.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(5)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty6" name="qty6" value="0" />
+              <h5>Los Angeles Lakers Max 90 Courtside T-Shirt - Mens</h5>
+              <div class="text-danger text-right">
+                <input id="price6" name="price6" value="45.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(6)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+          </div></div>
+        <div class="tab-pane fade" id="Footwear" role="tabpanel" aria-labelledby="Footwear" tabindex="0"><div class="row">
+            <div class="col-sm-4 "><img class="modalImage"
+                src="https://images.footballfanatics.com/dallas-mavericks/dallas-mavericks-jordan-luka-2-basketball-shoe-mens_ss5_p-14409955+u-slyrgi0yna0gzisl8yot+v-etlakpuiaqpw88ts2haa.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4 "><img class="modalImage"
+                src="https://images.footballfanatics.com/dallas-mavericks/dallas-mavericks-jordan-luka-2-basketball-shoe-mens_ss5_p-14409951+u-6zgvdlyeyfgm08csjwmv+v-5whlhs0apfb1vlyuyual.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4 "><img class="modalImage"
+                src="https://images.footballfanatics.com/milwaukee-bucks/milwaukee-bucks-nike-zoom-freak-5-basketball-shoe-mens_ss5_p-14409963+u-bkblo1iw47x3xhpkp7zd+v-xb4kemznf8jdczrigmvx.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty7" name="qty7" value="0" />
+              <h5>Dallas Mavericks JORDAN LUKA 2 Basketball Shoe - Mens</h5>
+              <div class="text-danger text-right">
+                <input id="price7" name="price7" value="142.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(7)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty8" name="qty8" value="0" />
+              <h5>Dallas Mavericks JORDAN LUKA 2 Basketball Shoe - Mens</h5>
+              <div class="text-danger text-right">
+                <input id="price8" name="price8" value="142.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(8)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty9" name="qty9" value="0" />
+              <h5>Milwaukee Bucks Nike Zoom Freak 5 Basketball Shoe - Mens</h5>
+              <div class="text-danger text-right">
+                <input id="price9" name="price9" value="148.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(9)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+          </div>
+  
+          <p>&nbsp;</p>
+          <div class="row">
+            <div class="col-sm-4 "><img class="modalImage"
+                src="https://images.footballfanatics.com/chicago-bulls/chicago-bulls-stance-city-edition-2022-sock-black-mens_ss4_p-13326023+u-syxnx1wf1txnccritddr+v-d7b87b556a5d464c9d2197aaeca6d503.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4 "><img class="modalImage"
+                src="https://images.footballfanatics.com/golden-state-warriors/golden-state-warriors-stance-nba-city-edition-socks-unisex_ss5_p-200802887+u-usw89m7vtobbtzi7itej+v-cvidkrwz41fgfqjvvmcf.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4 "><img class="modalImage"
+                src="https://images.footballfanatics.com/los-angeles-lakers/los-angeles-lakers-stance-nba-overspray-sock_ss4_p-13369238+u-1dpd0xdywx1rxgte0l5k+v-67b60d47f4b846b3bc6d805f2c51d365.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty10" name="qty10" value="0" />
+              <h5>Chicago Bulls Stance City Edition 2022 Sock - Black - Mens</h5>
+              <div class="text-danger text-right">
+                <input id="price10" name="price10" value="19.99" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(10)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty11" name="qty11" value="0" />
+              <h5>Golden State Warriors Stance NBA City Edition Socks - Unisex</h5>
+              <div class="text-danger text-right">
+                <input id="price11" name="price11" value="21.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(11)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty12" name="qty12" value="0" />
+              <h5>Los Angeles Lakers Stance NBA Overspray Sock</h5>
+              <div class="text-danger text-right">
+                <input id="price12" name="price12" value="21.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(12)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+          </div></div>
+        <div class="tab-pane fade" id="Tickets" role="tabpanel" aria-labelledby="Tickets" tabindex="0">c</div>
+        <div class="tab-pane fade" id="Balls" role="tabpanel" aria-labelledby="Balls" tabindex="0"><div class="row">
+            <div class="col-sm-4 modalImag e"><img class="modalImage"
+                src="https://images.footballfanatics.com/san-antonio-spurs/san-antonio-spurs-wilson-nba-team-composite-basketball-size-7_ss4_p-13314433+u-igwwuuf80dzuo45k19zu+v-9f9b64abbb134d14b979de190f082ff4.jpeg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4 modalImag e"><img class="modalImage"
+                src="https://images.footballfanatics.com/logo-gear/nba-wilson-dribbler-nba-version_ss4_p-12052184+u-6eeybt355n8lrek68gjg+v-82983a0c41f84c8590e18bd36d0e4f4f.jpeg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4 modalImag e"><img class="modalImage"
+                src="https://images.footballfanatics.com/philadelphia-76ers/philadelphia-76ers-wilson-nba-team-composite-basketball-size-7_ss4_p-12052221+u-xy4x2wz7rje7f0zg2h8r+v-8c14fe12048442118cd50b1e7dc317ac.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty13" name="qty13" value="0" />
+              <h5>Charlotte Hornets Jordan Statement Name & Number T-Shirt - Lamello Ball</h5>
+              <div class="text-danger text-right">
+                <input id="price13" name="price13" value="44.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(13)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty14" name="qty14" value="0" />
+              <h5>Atlanta Hawks Nike Icon Name & Number T-Shirt - Trae Young - Mens </h5>
+              <div class="text-danger text-right">
+                <input id="price14" name="price14" value="7.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(14)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty15" name="qty15" value="0" />
+              <h5>Toronto Raptors Black Mesh Crew Neck T-Shirt By Mitchell & Ness - Mens</h5>
+              <div class="text-danger text-right">
+                <input id="price15" name="price15" value="44.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(15)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+          </div>
+  
+          <p>&nbsp;</p>
+          <div class="row">
+            <div class="col-sm-4 "><img class="modalImage"
+                src="https://images.footballfanatics.com/cleveland-cavaliers/cleveland-cavaliers-wilson-nba-city-edition-2023-basketball-size-7_ss5_p-13394335+u-yp1e3nyoahkonsj4w3ib+v-uyywpghjfknlb5xueriv.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4 "><img class="modalImage"
+                src="https://images.footballfanatics.com/golden-state-warriors/golden-state-warriors-wilson-nba-city-edition-2023-basketball-size-7_ss5_p-13389955+u-dymsx7hg3gnempvk2m6e+v-jhzeo2ai3b7cmy0kqdrj.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4 "><img class="modalImage"
+                src="https://images.footballfanatics.com/los-angeles-lakers/los-angeles-lakers-wilson-nba-city-edition-2023-basketball-size-7_ss5_p-13394337+u-yfcdh7uuj71adhr3bol6+v-t8ho1xaexnhondgv7o8h.jpg?_hv=2&w=340" />
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty16" name="qty16" value="0" />
+              <h5>Cleveland Cavaliers Fade Graphic T-Shirt - Mens</h5>
+              <div class="text-danger text-right">
+                <input id="price16" name="price16" value="89.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(16)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty17" name="qty17" value="0" />
+              <h5>Memphis Grizzlies Street Collective Graphic T-Shirt - Mens</h5>
+              <div class="text-danger text-right">
+                <input id="price17" name="price17" value="89.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(17)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+            <div class="col-sm-4">
+              <input type="hidden" id="qty18" name="qty18" value="0" />
+              <h5>Los Angeles Lakers Max 90 Courtside T-Shirt - Mens</h5>
+              <div class="text-danger text-right">
+                <input id="price18" name="price18" value="89.00" class="text-danger text-right border-0" readonly> €
+              </div>
+              <button type="button" class="btn btn-primary btn-block" onclick="this.blur(); addProduct(18)">
+                <i class="fa fa-shopping-bag"></i> Adicionar ao meu cesto
+              </button>
+            </div>
+          </div></div>
+      </div>
+    </form>
+  </div>
+  <div id="myModal" class="modal">
+
+
+    <span class="close">&times;</span>
+
+
+    <img class="modal-content" id="img01">
+</div>
+  <!-- End of Work Area -->
+  <nav class="navbar navbar-expand-sm fixed-bottom bg-body-tertiary border-top">
+    <div class="container small">
+      <div class="navbar-text">&copy; Introdução as Tecnologias Web - 2023/24</div>
+      <div class="navbar-text">Made with <i class="fa fa-heart-o text-danger"></i> for U by <a href="mailto:jsp@ua.pt"
+          class="text-decoration-none text-muted">jsp@ua.pt</a>.</div>
+      <div class="navbar-nav">
+        <div class="nav-item text-end"><a href="https://www.ua.pt" class="nav-link">Universidade de Aveiro</a></div>
+      </div>
+    </div>
+  </nav>
+
+  <script src="../lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../lib/knockout/dist/knockout-latest.min.js"></script>
+  <script src="../lib/jquery/dist/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+  <script src="Shop.js"></script>
+  <script src="DarkMode.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('.nav-tabs a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+      });
+    });
+  </script>
+
+</body>
+
+</html>

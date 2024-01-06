@@ -57,27 +57,7 @@ function getUrlParameter(sParam) {
 };
 
 function TeamsViewModel() {
-    var self = this;
-
-
-    // Example function
-    self.activate = function (id) {
-        console.log('CALL: getArenas...');
-        var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
-        ajaxHelper(composedUri, 'GET').done(function (data) {
-            console.log(data);
-            hideLoading();
-            self.records(data.Records);
-            self.currentPage(data.CurrentPage);
-            self.hasNext(data.HasNext);
-            self.hasPrevious(data.HasPrevious);
-            self.pagesize(data.PageSize)
-            self.totalPages(data.TotalPages);
-            self.totalRecords(data.TotalRecords);
-            self.SetFavourites();
-            //self.SetFavourites();
-        });
-    };
+    
 }
 
 // Instantiate the view model
@@ -113,6 +93,7 @@ $(document).ajaxComplete(function (event, xhr, options) {
 
 function removeFav(Id) {
     console.log("remove fav5")
+    console.log(localStorage.getItem(Id))
     $("#fav-" + Id).remove();
 
     let fav5 = JSON.parse(localStorage.fav5|| '[]');
@@ -122,7 +103,7 @@ function removeFav(Id) {
     if (index != -1)
         fav5.splice(index, 1);
 
-    localStorage.setItem("fav5", JSON.stringify(fav2));
+    localStorage.setItem("fav5", JSON.stringify(fav5));
 }
 
 
@@ -137,10 +118,17 @@ $(document).ready(function () {
     for (const Id of fav5) {
         console.log(Id);
 
-        ajaxHelper('http://192.168.160.58/NBA/api/Teams/' + Id, 'GET').done(function (data) {
+        ajaxHelper('http://192.168.160.58/NBA/api/Teams/', 'GET').done(async function (data) {
             console.log(data)
-            if (localStorage.fav.length != 0) {
-                console.log('bacalhau com natas');
+            if (localStorage.fav5.length != 0) {
+                var records = data.Records;
+            
+            for (let item of records) {
+                if (item.Acronym == Id){
+                    var id = item.Id
+                    try {
+                    let data = await ajaxHelper('http://192.168.160.58/NBA/api/Teams/' + id+"?Acronym=" + Id, "GET");
+                    console.log('bacalhau com natas');
                 $("#table-favourites").show();
                 $('#noadd').hide();
                 $('#nofav').hide();
@@ -151,18 +139,25 @@ $(document).ready(function () {
                         <td class="align-middle">${data.City}</td>
                         <td class="align-middle">${data.ConferenceName}</td>
                         <td class="align-middle">${data.DivisionName}</td>
-                        <td class="align-middle">${data.State}</td>
+                        <td class="align-middle">${data.StateName}</td>
                         <td class="align-middle">
                         
-                        <a href="./TeamsDetails.html?id=${Id}&Acronym=${data.Acronym}" class="btn btn-default btn-light btn-xs">
+                        <a href="./TeamsDetails.html?id=${data.Id}&Acronym=${data.Acronym}" class="btn btn-default btn-light btn-xs">
                 <i class="fa fa-eye" title="Show team details"></i>
             </a>
                         </td>
                         <td class="text-end align-middle">
-                            <a class="btn btn-default btn-sm btn-favourite" onclick="removeFav(${Id})"><i class="fa fa-heart text-danger" title="Selecione para remover dos favoritos"></i></a>
+                            <a class="btn btn-default btn-sm btn-favourite" onclick="removeFav('${Id}')"><i class="fa fa-heart text-danger" title="Selecione para remover dos favoritos"></i></a>
                         </td>
                     </tr>`
                 )
+                } catch (error) {
+                    console.error(error);
+                }
+                }
+            }
+        
+                
 
             }
         });

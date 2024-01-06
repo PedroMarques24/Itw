@@ -139,7 +139,7 @@ $(document).ready(function () {
 
         ajaxHelper('http://192.168.160.58/NBA/api/Arenas/' + Id, 'GET').done(function (data) {
             console.log(data)
-            if (localStorage.fav.length != 0) {
+            if (localStorage.fav2.length != 0) {
                 console.log('bacalhau com natas');
                 $("#table-favourites").show();
                 $('#noadd').hide();
