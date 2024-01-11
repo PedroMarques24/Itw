@@ -91,20 +91,27 @@ $(document).ajaxComplete(function (event, xhr, options) {
 })
 
 
-function removeFav(Id) {
-    console.log("remove fav5")
-    console.log(localStorage.getItem(Id))
-    $("#fav-" + Id).remove();
+function removeFav(item) {
+    var localStorageKey = "fav5_" + item.acronym; // Using the acronym as part of the key
+    console.log("remove fav5");
+    console.log(localStorage.getItem(localStorageKey));
 
-    let fav5 = JSON.parse(localStorage.fav5|| '[]');
+    $("#" + localStorageKey).remove();
 
-    const index = fav5.indexOf(Id);
+    let fav5 = JSON.parse(localStorage.fav5 || '[]');
 
-    if (index != -1)
+    const index = fav5.findIndex(fav => fav.id === item.id);
+
+    if (index !== -1) {
         fav5.splice(index, 1);
-
-    localStorage.setItem("fav5", JSON.stringify(fav5));
+        localStorage.setItem("fav5", JSON.stringify(fav5));
+    }
+    console.log(fav5)
 }
+
+
+
+
 
 
 $(document).ready(function () {
@@ -117,7 +124,29 @@ $(document).ready(function () {
 
     for (const Id of fav5) {
         console.log(Id);
+        ajaxHelper('http://192.168.160.58/NBA/api/Teams/' + Id.id+"?Acronym=" + Id.acronym, "GET").done(function (data) {
+            $("#table-favourites").show();
+                $('#noadd').hide();
+                $('#nofav').hide();
+                $("#table-favourites").append(
+                    `<tr id="fav-${Id}">
+                    <td class="align-middle">${data.Acronym}</td>
+                        <td class="align-middle">${data.Name}</td>
+                        <td class="align-middle">${data.City}</td>
+                        <td class="align-middle">${data.ConferenceName}</td>
+                        <td class="align-middle">${data.DivisionName}</td>
+                        <td class="align-middle">${data.StateName}</td>
+                        <td class="align-middle">
+                        
+                        <a href="./TeamsDetails.html?id=${data.Id}&Acronym=${data.Acronym}" class="btn btn-default btn-light btn-xs">
+                <i class="fa fa-eye" title="Show team details"></i>
+            </a>
+                        </td>
+                        
 
+                    </tr>`)
+    })
+        /*
         ajaxHelper('http://192.168.160.58/NBA/api/Teams/', 'GET').done(async function (data) {
             console.log(data)
             if (localStorage.fav5.length != 0) {
@@ -160,7 +189,7 @@ $(document).ready(function () {
                 
 
             }
-        });
+        });/** */
         sleep(50);
     }
 

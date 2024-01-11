@@ -18,7 +18,7 @@ var vm = function () {
     self.StateName = ko.observable('');
     self.StateId = ko.observable('');
     self.City = ko.observable('');
-    self.Logo = ko.observable('');
+    self.Logo = ko.observable('basketballteam.png');
     self.History = ko.observable('');
     self.Seasons =ko.observableArray([]);
     self.Players = ko.observableArray([]);
@@ -41,7 +41,7 @@ var vm = function () {
             self.StateName(data.StateName);
             self.StateId(data.StateId);
             self.City(data.City);
-            self.Logo(data.Logo);
+            if (data.Logo != null){self.Logo(data.Logo)};
             self.History(data.History);
             self.Seasons(data.Seasons);
             self.Players(data.Players);

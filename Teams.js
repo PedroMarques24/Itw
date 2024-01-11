@@ -3,6 +3,27 @@ var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
     var self = this;
+    self.isFavourite = function (id) {
+        return self.favourites().some(function (fav) {
+            return fav.id === id;
+        });
+    };
+
+    self.updateButtonColor = function () {
+        // Do nothing if the favourites array is empty
+        if (self.favourites().length === 0) {
+            return;
+        }
+
+        // Get the current button's ID
+        var buttonId = $(this).attr('data-id');
+
+        // Check if the current button's ID is in the favourites array
+        var isFavorite = self.isFavourite(buttonId);
+
+        // Update the button color based on the isFavorite value
+        $(this).toggleClass('btn-danger', isFavorite);
+    };
     self.baseUri = ko.observable('http://192.168.160.58/NBA/API/Teams');
     self.displayName = 'NBA Teams List';
     self.error = ko.observable('');
@@ -41,30 +62,43 @@ var vm = function () {
             list.push(i + step);
         return list;
     };
-    self.toggleFavourite = function (id) {
-        if (self.favourites.indexOf(id) == -1) {
-            self.favourites.push(id);
-            console.log(id)
+    self.toggleFavourite = function (item) {
+        var id = item.id; // Accessing the ID property from the passed object
+        var acronym = item.acronym; // Accessing the acronym property from the passed object
+    
+        // Check if the ID is already in favourites
+        var index = self.favourites().findIndex(function (fav) {
+            return fav.id === id;
+        });
+    
+        if (index === -1) {
+            // If not in favourites, add it
+            self.favourites.push({ id: id, acronym: acronym });
+            console.log(item);
+        } else {
+            // If already in favourites, remove it
+            self.favourites.splice(index, 1);
         }
-        else {
-            self.favourites.remove(id);
-        }
+    
         localStorage.setItem("fav5", JSON.stringify(self.favourites()));
-        console.log(localStorage.getItem("fav5"))
+        console.log(localStorage.getItem("fav5"));
     };
+    
     self.SetFavourites = function () {
         let storage;
         try {
             storage = JSON.parse(localStorage.getItem("fav5"));
+        } catch (e) {
+            // Handle parsing error
         }
-        catch (e) {
-            ;
-        }
+    
         if (Array.isArray(storage)) {
             self.favourites(storage);
         }
-    }
+    };
+    
     self.favourites = ko.observableArray([]);
+    
 
     //--- Page Events
     self.activate = function (id) {

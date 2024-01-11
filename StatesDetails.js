@@ -10,7 +10,7 @@ var vm = function () {
     //--- Data Record
     self.Id = ko.observable('');
     self.Name = ko.observable('');
-    self.Flag = ko.observable('');
+    self.Flag = ko.observable('black-flag.png');
 
     //--- Page Events
     self.activate = function (id) {
@@ -21,7 +21,8 @@ var vm = function () {
             hideLoading();
             self.Id(data.Id);
             self.Name(data.Name);
-            self.Flag(data.Flag);
+            if (data.Flag != null){self.Flag(data.Flag)};
+            
         });
     };
 
