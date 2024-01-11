@@ -103,7 +103,7 @@ function sleep(milliseconds) {
 
 $(document).ready(function () {
     console.log("ready!!");
-    ko.applyBindings(statesViewModel);
+    ko.applyBindings(StatesViewModel);
 });
 
 $(document).ajaxComplete(function (event, xhr, options) {
@@ -140,7 +140,6 @@ $(document).ready(function () {
         ajaxHelper('http://192.168.160.58/NBA/api/States/' + Id, 'GET').done(function (data) {
             console.log(data)
             if (localStorage.fav3.length != 0) {
-                console.log('bacalhau com natas');
                 $("#table-favourites").show();
                 $('#noadd').hide();
                 $('#nofav').hide();
@@ -154,7 +153,7 @@ $(document).ready(function () {
             </a>
                         </td>
                         <td class="text-end align-middle">
-                            <a class="btn btn-default btn-sm btn-favourite" onclick="removeFav(${Id})"><i class="fa fa-heart text-danger" title="Selecione para remover dos favoritos"></i></a>
+                            <a class="btn btn-default btn-sm btn-favourite" onclick="removeFav('${Id}')"><i class="fa fa-heart text-danger" title="Selecione para remover dos favoritos"></i></a>
                         </td>
                     </tr>`
                 )

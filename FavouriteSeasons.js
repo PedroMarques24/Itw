@@ -103,7 +103,7 @@ function sleep(milliseconds) {
 
 $(document).ready(function () {
     console.log("ready!!");
-    ko.applyBindings(seasonsViewModel);
+    ko.applyBindings(SeasonsViewModel);
 });
 
 $(document).ajaxComplete(function (event, xhr, options) {
@@ -140,7 +140,6 @@ $(document).ready(function () {
         ajaxHelper('http://192.168.160.58/NBA/api/Seasons/' + Id, 'GET').done(function (data) {
             console.log(data)
             if (localStorage.fav4.length != 0) {
-                console.log('bacalhau com natas');
                 $("#table-favourites").show();
                 $('#noadd').hide();
                 $('#nofav').hide();

@@ -128,7 +128,7 @@ $(document).ready(function () {
                     var id = item.Id
                     try {
                     let data = await ajaxHelper('http://192.168.160.58/NBA/api/Teams/' + id+"?Acronym=" + Id, "GET");
-                    console.log('bacalhau com natas');
+
                 $("#table-favourites").show();
                 $('#noadd').hide();
                 $('#nofav').hide();
