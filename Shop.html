@@ -20,6 +20,40 @@
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+        .carousel-item {
+            z-index: -100;
+            height: 400px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    
+            .carousel-item:nth-child(1) {
+                background-image: url('https://pumpingmarvellous.org/wp-content/uploads/2022/09/067483-Pumping-Marvellous-Pop-Art-Images-Words39.png');
+                height: 225px;
+            }
+    
+            .carousel-item:nth-child(2) {
+                background-image: url('nba-christmas-jerseys-2015-lakers-warriors-spursjpg.jpg');
+                height: 225px;
+                border-radius: 5px;
+            }
+    
+            .carousel-item:nth-child(3) {
+                background-image: url('Shoes.PNG');
+                height: 225px;
+                border-radius: 5px;
+            }
+    
+            .carousel-item:nth-child(4) {
+                background-image: url('https://www.verywellfit.com/thmb/eGgUgsBD-PPfhj8Msj_r9f-HxAw=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/VW-Fit-9-best-basketballs-4176913-final-b141a47887264312935bc3114383465c.jpg');
+                height: 225px;
+                border-radius: 5px;
+            }
+    
+    
+    </style>
 </head>
 
 <body>
@@ -92,6 +126,36 @@
         </div>
     </nav>
     <br />
+    <div class="container mt-4">
+        <div id="myCarousel" class="carousel slide carousel-fade mb-5" data-bs-ride="carousel" data-bs-interval="10000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" aria-label="Slide 1" class="active" aria-current="true"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 3"></button>
+            </div>
+            <p>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                </div>
+                <div class="carousel-item">
+                </div>
+                <div class="carousel-item">
+                </div>
+                <div class="carousel-item">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+    </div>
     <div class="container mt-4">
         <form action="http://192.168.160.36/FormEcho.aspx">
             <div class="row">
